@@ -1,3 +1,121 @@
+def ask(prompt, token, temp, model, streamprint=True, linktoanotherserver=False, mode="text"):
+    # Set API key
+    if model[:3] == "gpt":
+        os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY"
+        api_key = os.getenv("OPENAI_API_KEY")
+    else:
+        os.environ["OPENAI_API_KEY"] = "EMPTY"
+        api_key = os.getenv("OPENAI_API_KEY")
+
+    # Set API base URL
+    if model[:3] == "gpt":
+        api_base = 'https://api.openai.com/v1'
+    elif '/' in model or 'local' in model:
+        if os.path.isdir("/path/to/your/local/directory"):
+            api_base = "http://localhost:8000/v1"
+        else:
+            api_base = "http://localhost:8001/v1"
+    else:
+        api_base = "http://localhost:11434/v1"
+
+    # Check if connection to another server is needed
+    if linktoanotherserver and ('/' in model or 'local'):
+        api_base = "http://localhost:8001/v1"
+    
+    if model == "gpto1":
+        setmodel = 'o1-preview'
+    elif model == "gpto1mini":
+        setmodel = "o1-mini"
+    elif model == "gpt4":
+        setmodel = 'gpt-4o'
+    elif model == "gpt4mini":
+        setmodel = "gpt-4o-mini"
+    elif model == "gpt4t":
+        setmodel = "gpt-4-turbo"
+    elif model == "local":
+        client = OpenAI(api_key=api_key, base_url=api_base)
+        setmodel = re.search(r"id='(.*?)', created=", str(client.models.list())).group(1) if re.search(r"id='(.*?)', created=", str(client.models.list())) else None
+    else:
+        client = OpenAI(api_key=api_key, base_url=api_base)
+    
+    if streamprint:
+        print('Stream print report model is:', setmodel)
+
+    # Process requests in different modes
+    if mode == "image":
+        # For image mode, use pre-constructed messages with corresponding temperature and token values
+        chat_completion_from_base64 = client.chat.completions.create(
+            messages=prompt,
+            model=setmodel,
+            max_tokens=token,
+            temperature=temp,
+        )
+        final_response = chat_completion_from_base64.choices[0].message.content
+        print(f"Chat completion output (image mode): {final_response}")
+    
+    # Text mode processing
+    else:
+        if "o1" not in setmodel:
+            stream = client.chat.completions.create(
+                model=setmodel,
+                messages=prompt,
+                stream=True,
+                max_tokens=token,
+                temperature=temp,
+            )
+            final_response = ""
+            for chunk in stream:
+                if chunk.choices[0].delta.content is not None:
+                    if streamprint:
+                        print(chunk.choices[0].delta.content, end="")
+                    final_response += chunk.choices[0].delta.content
+        else:
+            final_response = client.chat.completions.create(
+                model=setmodel,
+                messages=prompt,
+            )
+            final_response = final_response.choices[0].message.content
+
+    # Save record to a dictionary
+    record = {
+        "prompt": prompt,
+        "setmodel": setmodel,
+        "temp": temp,
+        "max_tokens": token,
+        "response": final_response
+    }
+
+    # Generate folder and file name
+    now = datetime.now()
+    date_str = now.strftime("%y%m%d")
+    
+    # Process prompt, remove non-alphanumeric characters, and truncate to first 30 characters
+    prompt_str = re.sub(r'\W+', '', str(prompt))[:30]
+    
+    folder_path = f"/path/to/your/history/directory/{setmodel}/{date_str}"
+    os.makedirs(folder_path, exist_ok=True)
+
+    # Check for unique file name
+    max_digits = 100
+    current_digits = 3
+
+    while current_digits <= max_digits:
+        random_suffix = f"{random.randint(10**(current_digits-1), 10**current_digits - 1)}"
+        file_name = f"{prompt_str}RANDOMKEY{random_suffix}.pkl"
+        file_path = os.path.join(folder_path, file_name)
+        
+        if not os.path.exists(file_path):
+            with open(file_path, 'wb') as f:
+                pickle.dump(record, f)
+            break
+        
+        current_digits += 1
+
+    if current_digits > max_digits:
+        raise RuntimeError("Unable to generate a unique file name after exhausting all possible options.")
+
+    return final_response
+
 def upload_RUN_PAY_jsonl(jsonl_input, description='default description', do_it_now=False, jobtype="chat"):
     # Uploads a JSONL file to OpenAI and returns the file ID and batch request ID
     
