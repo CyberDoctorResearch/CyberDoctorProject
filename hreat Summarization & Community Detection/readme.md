@@ -1,1 +1,0 @@
-# hreat Summarization & Community Detection
