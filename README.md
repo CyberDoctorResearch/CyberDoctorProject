@@ -6,6 +6,8 @@ CYBERDOC is an innovative tool designed to enhance Cyber Threat Intelligence (CT
 
 ## Approach
 The architecture of CYBERDOC, illustrated in Figure 2, consists of three major phases:
+![image](https://i.imgur.com/sJL1t2F.png)
+
 
 1. **Article Preprocessing**: This phase prepares collected CTI articles for downstream analysis by:
    - **Article Deduplication**: Utilizing a language model to identify and filter redundant articles, ensuring that only unique CTI articles are retained for processing.
