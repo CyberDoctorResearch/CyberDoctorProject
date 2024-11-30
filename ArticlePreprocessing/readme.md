@@ -14,7 +14,7 @@ This folder contains the source code and resources for the Article Preprocessing
 
 3. **Tactic Model Training and Improvement**:
    - Use the following combined steps to train and enhance the tactic classification model for identifying sentences that describe attack tactics:
-     - **Data Preparation**: Use the `labeled sentence with tactics .xlsx` file to provide labeled sentences for training the tactic model.
+     - **Data Preparation**: Use the `labeled sentence with tactics.xlsx` file to provide labeled sentences for training the tactic model.
      - **Model Training and Inference**: Use the `tactic model training and inference.ipynb` notebook to fine-tune a RoBERTa-based model for accurately identifying tactics in CTI article sentences.
      - **Active Learning (Optional)**: Use the `Optional Active learning.ipynb` notebook to iteratively select and label additional sentences, expanding the dataset and further improving the model's performance if needed.
 
