@@ -20,4 +20,29 @@ In the **Knowledge Graph Construction** module, we leverage SECDoc to create a s
    - The knowledge graph is built using the triples extracted from CTI articles. The nodes represent the security-related entities (e.g., CVEs, malware, APT groups), while the edges depict the relationships or interactions (e.g., exploitation, attack behaviors) among these entities.
    - SECDoc uses advanced techniques to ensure consistency across multiple articles, refining connections using vector embeddings to align similar entities. The result is a comprehensive, security-oriented knowledge graph that reveals cross-article correlations.
 
+### Workflow
+
+The following files and scripts in the directory serve specific purposes in the **Knowledge Graph Construction** workflow:
+
+1. **`Article Duplication Dataset.xlsx`**  
+   Contains 1,000 CTI articles related to 100 CVEs from 2024 for building and testing the knowledge graph.
+
+2. **`Article De-duplication Dataset.xlsx`**  
+   Documents the results of the article de-duplication process, showing original and filtered CTI articles.
+
+3. **`Knowledge Graph Construction.ipynb`**  
+   Jupyter Notebook for constructing the knowledge graph, including classification, entity recognition, and triple extraction.
+
+4. **`LLM AutoEval.ipynb`**  
+   Notebook for evaluating the precision and recall of the knowledge graph using automated LLM-based metrics.
+
+5. **`complete_list_of_15079_cves_recorded_in_2024_on_nvd.csv`**  
+   Full list of 15,079 CVEs from 2024 used to select and analyze specific CVEs.
+
+6. **`random_sampled_100CVEs_names.pkl`**  
+   Stores a random selection of 100 CVEs for focused analysis.
+
+7. **`readme.md`**  
+   Project documentation providing an overview, usage instructions, and file descriptions.
+
 
