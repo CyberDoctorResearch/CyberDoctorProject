@@ -22,4 +22,36 @@ This folder contains the source code and resources for the Article Preprocessing
    - The `tools.py` script provides utility functions.
 
 
+### Active Learning and Uncertainty Sampling
+
+- Employed active learning to improve model performance, particularly for tactics with fewer labeled samples.
+- **Uncertainty Measures**:
+  - **Classification Uncertainty**: \( 1 - p_{\text{max}} \)
+  - **Classification Margin**: \( p_{\text{max}} - p_{\text{next max}} \)
+  - **Classification Entropy**: \( -\sum_{i=1}^{n} p_i \log_2 p_i \)
+- **Process**:
+  - Select sentences with high uncertainty scores.
+  - Manually label these sentences and update the dataset.
+  - Retrain the model with the expanded dataset.
+
+## Model Performance
+
+- **Improvement Through Active Learning**:
+  - The tactic model achieved an average **88% precision** and **90% recall** after active learning.
+- **Performance Metrics Before and After Active Learning**:
+
+  | Attack Tactic       | Precision Before | Recall Before | Precision After | Recall After |
+  |---------------------|------------------|---------------|-----------------|--------------|
+  | Initial Access      | 0.67             | 0.75          | 0.88            | 0.89         |
+  | Execution           | 0.17             | 0.11          | 0.90            | 0.92         |
+  | Defense Evasion     | 0.50             | 0.14          | 0.85            | 0.86         |
+  | Command and Control | 0.05             | 0.06          | 0.84            | 0.87         |
+  | Privilege Escalation| 0.35             | 0.39          | 0.89            | 0.90         |
+  | Persistence         | 0.00             | 0.00          | 0.91            | 0.93         |
+  | Lateral Movement    | 0.00             | 0.00          | 0.90            | 0.91         |
+  | Data Leak           | 0.18             | 0.12          | 0.88            | 0.89         |
+  | Exfiltration        | 0.00             | 0.00          | 0.84            | 0.89         |
+  | Impact              | 0.00             | 0.00          | 0.94            | 0.92         |
+  | **Macro Average**   | **0.21**         | **0.17**      | **0.88**        | **0.90**     |
+
 
