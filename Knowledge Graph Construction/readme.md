@@ -6,8 +6,7 @@ In the **Knowledge Graph Construction** module, we leverage SECDoc to create a s
 ### Key Steps
 
 1. **CTI Sentence Classification**:
-   - SECDoc employs RoBERTa classification models for **CTI Article Classification**, which is a critical step in focusing on relevant information in large CTI articles. These models are used to classify sentences into **tactics sentences**, distinguishing those that describe cyber attack techniques from irrelevant content.
-   - The **Tactical Model** identifies sentences that discuss attack tactics. This classification ensures that the knowledge graph is built on highly relevant and focused data.
+   - SECDoc employs RoBERTa classification models for **Sentence Tactic Classification**, which is a critical step in focusing on relevant information in large CTI articles. This model is used to classify sentences into **tactics sentences**, distinguishing those that describe cyber attack techniques from irrelevant content.
 
 2. **Security-Related Entity Recognition**:
    - **Security-related entity recognition** is another essential step where SECDoc identifies critical entities, such as malware names, CVE identifiers, IP addresses, and more. Multiple LLM agents are used to extract security-specific entities from the text, ensuring that key information related to cyber threats is captured efficiently.
