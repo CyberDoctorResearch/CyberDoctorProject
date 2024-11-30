@@ -24,7 +24,7 @@ In the **Knowledge Graph Construction** module, we leverage SECDoc to create a s
 
 The following files and scripts in the directory serve specific purposes in the **Knowledge Graph Construction** workflow:
 
-1. **`Article Duplication Dataset.xlsx`**  
+1. **`Article Duplication Dataset.csv`**  
    Contains 1,000 CTI articles related to 100 CVEs from 2024 for building and testing the knowledge graph.
 
 2. **`Article De-duplication Dataset.xlsx`**  
