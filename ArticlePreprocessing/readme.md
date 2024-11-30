@@ -33,6 +33,17 @@ This folder contains the source code and resources for the Article Preprocessing
   - Select sentences with high uncertainty scores.
   - Manually label these sentences and update the dataset.
   - Retrain the model with the expanded dataset.
+ 
+## Article Deduplication Effectiveness
+
+**Enhanced Diversity and Comprehensiveness**: The deduplication process significantly improved the variety and depth of unique behaviors captured in the generated summaries. This enhancement was especially pronounced for CVEnvd+ (a group of CVEs with insufficient behavior descriptions in the National Vulnerability Database), where diverse articles were crucial for uncovering missing or overlooked details.
+
+- On average, **Summarydedup** (summaries generated from deduplicated articles) demonstrated a 30% increase in unique behaviors compared to **Summarydup** (summaries generated from all articles without deduplication) for CVEnvd+.  
+- For CVE2024pop (a group of popular CVEs in 2024), deduplication offered a smaller but consistent improvement by reducing redundant content in summaries while retaining critical details.
+
+**Case Studies**: Deduplication uncovered critical behaviors that were obscured by repetitive content in non-deduplicated summaries. Examples include:  
+- **CVE-2024-21336**: The deduplicated summary revealed its association with SSL/TLS impersonation (a type of attack where secure communication channels are faked), a detail hidden in repetitive content from non-deduplicated articles.  
+- **CVE-2024-22043**: The deduplicated summary highlighted critical information about an out-of-bounds read vulnerability (a programming error where data outside the intended memory boundaries is accessed) affecting Siemens Parasolid, a CAD software component.  
 
 ## Model Performance
 
