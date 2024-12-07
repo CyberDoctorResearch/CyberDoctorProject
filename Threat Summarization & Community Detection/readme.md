@@ -33,6 +33,6 @@ In the community detection step, CYBERDOC uses the following rules to filter the
 - **CVE-2024-22043**: The deduplicated summary highlighted critical information about an out-of-bounds read vulnerability (a programming error where data outside the intended memory boundaries is accessed) affecting Siemens Parasolid, a CAD software component.  
 
 
-## Evaluation
+## Community Detction Evaluation
 We evaluate the performance of the community detection algorithm by comparing the results with core expansion, Lpanni, Leiden, Umstmo, and Angle. The results show that CYBERDOC outperforms the other algorithms in terms of average articles related to community, average correlated security entity number, and precision of community edges. THe following table shows that CYBERDOC can more accurately detect the communities that are closely related to security. Also the community detected by CYBERDOC has more correlated security entities and articles than the other algorithms.
 ![Alt text](https://i.imgur.com/j93JoOk.png)
