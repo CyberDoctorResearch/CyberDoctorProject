@@ -45,4 +45,8 @@ The following files and scripts in the directory serve specific purposes in the 
 7. **`readme.md`**  
    Project documentation providing an overview, usage instructions, and file descriptions.
 
+### Knowledge Graph Construction
 
+In terms of knowledge graph construction, **CyberDoctor** achieves superior performance with higher recall and F1 scores compared to **GPT-4o** and **GraphRAG**, demonstrating its advanced capability in extracting security-related behaviors and relationships while maintaining high precision.
+
+![image](https://i.imgur.com/HFaHHDN.png)
